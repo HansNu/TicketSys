@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
-using TicketSys.Models.DTOs;
 using TicketSys.Services;
 
 namespace TicketSys.Controllers;

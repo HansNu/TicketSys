@@ -40,7 +40,7 @@ public class AppDbContext : DbContext
                 Id = 2,
                 Email = "customer@test.com",
                 Password = BCrypt.Net.BCrypt.HashPassword("Customer123!"),
-                Role = "Customer",
+                Role = "User",
                 FullName = "John Doe",
                 CreatedAt = DateTime.UtcNow
             }

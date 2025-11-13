@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using TicketSys.Data;
 using TicketSys.Models;
-using TicketSys.Models.DTOs;
 
 namespace TicketSys.Services;
 
@@ -29,7 +28,7 @@ public class AuthService : IAuthService
         {
             Email = request.Email,
             Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
-            Role = "Customer",
+            Role = "User",
             FullName = request.Username,
             CreatedAt = DateTime.UtcNow
         };

@@ -118,3 +118,4 @@ D:\Code Practice\Projects\TicketSys\obj\Debug\net8.0\TicketSys.pdb
 D:\Code Practice\Projects\TicketSys\obj\Debug\net8.0\TicketSys.genruntimeconfig.cache
 D:\Code Practice\Projects\TicketSys\obj\Debug\net8.0\ref\TicketSys.dll
 D:\Code Practice\Projects\TicketSys\bin\Debug\net8.0\BCrypt.Net-Next.dll
+D:\Code Practice\Projects\TicketSys\obj\Debug\net8.0\TicketSys.sourcelink.json
