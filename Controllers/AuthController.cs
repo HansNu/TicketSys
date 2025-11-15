@@ -19,7 +19,7 @@ public class AuthController : ControllerBase
     [HttpPost("register")]
     public async Task<IActionResult> Register(RegisterRequest request)
     {
-        var result = await iAuthService.RegisterAsync(request);
+        var result = await iAuthService.Register(request);
         if (result == null)
             return BadRequest(new { message = "User already exists" });
         
@@ -29,7 +29,7 @@ public class AuthController : ControllerBase
     [HttpPost("login")]
     public async Task<IActionResult> Login(LoginRequest request)
     {
-        var result = await iAuthService.LoginAsync(request);
+        var result = await iAuthService.Login(request);
         if (result == null)
             return Unauthorized(new { message = "Invalid credentials" });
         

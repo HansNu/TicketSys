@@ -30,7 +30,7 @@ public class TicketsController : ControllerBase
             Title = request.Title,
             Description = request.Description,
             Priority = request.Priority,
-            Status = "Open",
+            Status = "Requested",
             UserId = userId,
             CreatedAt = DateTime.UtcNow
         };
@@ -66,7 +66,6 @@ public class TicketsController : ControllerBase
         if (ticket == null)
             return NotFound();
 
-        // Customer can only view own tickets
         if (role != "Admin" && ticket.UserId != userId)
             return Forbid();
 
@@ -86,7 +85,7 @@ public class TicketsController : ControllerBase
         if(ticket.Status != "Requested")
             return BadRequest(new { message = "Only tickets with status 'Requested' can be updated" });
 
-        ticket.Status = request.Status;
+        ticket.Status = "Requested";
         ticket.Description = request.Description;
         ticket.Priority = request.Priority;
         ticket.Title = request.Title;

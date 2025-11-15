@@ -18,10 +18,10 @@ public class Ticket
     
     [Required]
     [Column("status")]
-    public string Status { get; set; } = "Open"; // Open, InProgress, Closed
+    public string Status { get; set; } = "Open";
     
     [Column("priority")]
-    public string Priority { get; set; } = "Medium"; // Low, Medium, High
+    public string Priority { get; set; } = "Medium";
     
     [Column("created_at")]
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;

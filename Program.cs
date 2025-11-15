@@ -9,11 +9,11 @@ using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-// Database
+// DB
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-// JWT Authentication
+// JWT Authentication : Bearer 'insert Token' -> JWT Validates -> Access Granted / Returns Unauthorized
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -43,7 +43,6 @@ builder.Services.AddCors(options =>
     });
 });
 
-// Services
 builder.Services.AddScoped<IAuthService, AuthService>();
 
 builder.Services.AddControllers();

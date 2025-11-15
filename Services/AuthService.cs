@@ -19,7 +19,7 @@ public class AuthService : IAuthService
         configure = config;    
     }
 
-    public async Task<AuthResponse?> RegisterAsync(RegisterRequest request)
+    public async Task<AuthResponse?> Register(RegisterRequest request)
     {
         if (await dbContext.Users.AnyAsync(u => u.Email == request.Email))
             return null;
@@ -27,7 +27,7 @@ public class AuthService : IAuthService
         var user = new User
         {
             Email = request.Email,
-            Password = BCrypt.Net.BCrypt.HashPassword(request.Password),
+            Password = BCrypt.Net.BCrypt.HashPassword(request.Password), //encode password using bcrypt
             Role = "User",
             FullName = request.Username,
             CreatedAt = DateTime.UtcNow
@@ -39,7 +39,7 @@ public class AuthService : IAuthService
         return GenerateToken(user);
     }
 
-    public async Task<AuthResponse?> LoginAsync(LoginRequest request)
+    public async Task<AuthResponse?> Login(LoginRequest request)
     {
         var user = await dbContext.Users.FirstOrDefaultAsync(u => u.Email == request.Email);
 
@@ -51,9 +51,11 @@ public class AuthService : IAuthService
 
     private AuthResponse GenerateToken(User user)
     {
+        //sign token with secret key
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configure["Jwt:Key"]!));
         var credentials = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
+        //Store user info in token 
         var claims = new[]
         {
             new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
@@ -62,6 +64,7 @@ public class AuthService : IAuthService
             new Claim(ClaimTypes.Name, user.FullName ?? user.Email)
         };
 
+        //create token
         var token = new JwtSecurityToken(
             issuer: configure["Jwt:Issuer"],
             audience: configure["Jwt:Audience"],
